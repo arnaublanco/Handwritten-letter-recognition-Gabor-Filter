@@ -9,6 +9,8 @@ int main(int argc, char** argv) {
 	Mat frame;
 	while (true) {
 		cap.read(frame);
+		cv::cvtColor(frame, frame,COLOR_BGR2GRAY);
+		frame = frame > 128;
 		imshow("Gabor Filter App", frame);
 		waitKey(1);
 	}
