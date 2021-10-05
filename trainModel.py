@@ -8,15 +8,16 @@ import idx2numpy
 import pdb
 from sklearn.model_selection import RepeatedKFold
 from sklearn.multiclass import OneVsOneClassifier
-import pickle
+import joblib
 import time
+from sklearn.decomposition import PCA
 np.seterr(divide='ignore', invalid='ignore')
 
 # Load NMIST dataset.
 trainX = idx2numpy.convert_from_file("data/train-images-idx3-ubyte")
 labelsX = idx2numpy.convert_from_file("data/train-labels-idx1-ubyte")
 
-mxm = 20
+mxm = 20000
 features = np.empty((mxm, trainX.shape[1]*trainX.shape[2]*40))
 labels = np.array([])
 for i in range(mxm):
@@ -34,6 +35,11 @@ for i in range(mxm):
 
 	features[i,:] = curr # Append features
 
+print('Fitting PCA...')
+pca = PCA(n_components=50)
+pca.fit(features)
+features = pca.transform(features)
+print('PCA fitted. Computing SVM...')
 #pdb.set_trace()
 kf = RepeatedKFold(n_splits=3, n_repeats=3)
 clf = OneVsOneClassifier(svm.SVC(kernel='rbf',C=100))
@@ -46,10 +52,10 @@ for train, test in kf.split(features):
 	clf.fit(X_train,y_train)
 	currAcc = clf.score(X_test,y_test)
 	end = time.time()
-	print('Accuracy:',currAcc,'Elapsed time (s):',round(end-start,3))
+	print('Accuracy:',round(currAcc,3),'| Elapsed time (s):',round(end-start,3))
 	acc.append(currAcc)
 	counter = counter + 1
 
-filename = 'model.sav'
-pickle.dump(clf, open(filename, 'wb'))
-print('Overall accuracy:',np.mean(acc))
+filename = 'model.cls'
+joblib.dump(clf, filename)
+print('Overall accuracy:',round(np.mean(acc),3))
