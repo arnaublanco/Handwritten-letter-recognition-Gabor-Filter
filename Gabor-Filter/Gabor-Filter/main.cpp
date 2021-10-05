@@ -1,5 +1,6 @@
 #include <iostream>
 #include "opencv2/opencv.hpp"
+#include "opencv2/ml.hpp"
 using namespace cv;
 
 int main(int argc, char** argv) {
