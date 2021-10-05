@@ -9,7 +9,7 @@ int readFlippedInteger(std::istream &in) {
     return *reinterpret_cast<int*>(temp);
 }
 
-int training() {
+int main() {
     std::ifstream fin("MNIST/train-images.idx3-ubyte", std::ios::binary);
 
     if (!fin) {
