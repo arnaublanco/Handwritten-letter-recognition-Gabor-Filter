@@ -17,6 +17,7 @@ np.seterr(divide='ignore', invalid='ignore')
 trainX = idx2numpy.convert_from_file("data/train-images-idx3-ubyte")
 labelsX = idx2numpy.convert_from_file("data/train-labels-idx1-ubyte")
 
+# Compute features
 mxm = 20000
 features = np.empty((mxm, trainX.shape[1]*trainX.shape[2]*40))
 labels = np.array([])
@@ -35,12 +36,14 @@ for i in range(mxm):
 
 	features[i,:] = curr # Append features
 
+# Dimensionality reduction
 print('Fitting PCA...')
 pca = PCA(n_components=50)
 pca.fit(features)
 features = pca.transform(features)
 print('PCA fitted. Computing SVM...')
-#pdb.set_trace()
+
+# Cross-validation: training and accuracy
 kf = RepeatedKFold(n_splits=3, n_repeats=3)
 clf = OneVsOneClassifier(svm.SVC(kernel='rbf',C=100))
 counter = 1
@@ -56,6 +59,7 @@ for train, test in kf.split(features):
 	acc.append(currAcc)
 	counter = counter + 1
 
+# Save model in .cls file
 filename = 'model.cls'
 joblib.dump(clf, filename)
 print('Overall accuracy:',round(np.mean(acc),3))
