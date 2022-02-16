@@ -4,4 +4,4 @@ This a handwritten letter recognition script for numbers using the Gabor Filter,
 
 The programming language used is Python.
 
-The dataset is the MNIST dataset: http://yann.lecun.com/exdb/mnist/
+The data used is the MNIST dataset: http://yann.lecun.com/exdb/mnist/
