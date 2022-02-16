@@ -60,6 +60,8 @@ for train, test in kf.split(features):
 	counter = counter + 1
 
 # Save model in .cls file
-filename = 'model.cls'
-joblib.dump(clf, filename)
+filename_SVM = 'model.cls'
+filename_PCA = 'pca.cls'
+joblib.dump(clf, filename_SVM)
+joblib.dump(pca, filename_PCA)
 print('Overall accuracy:',round(np.mean(acc),3))
