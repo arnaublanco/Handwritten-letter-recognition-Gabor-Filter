@@ -1,6 +1,6 @@
 # Handwritten letter recognition
 
-In this project, I utilize the MNIST dataset as a foundation for the classification of letters using a Support Vector Machine (SVM). The workflow can be summarized in the following key steps:
+In this project, we utilize the MNIST dataset as a foundation for the classification of letters using a Support Vector Machine (SVM). The workflow can be summarized in the following key steps:
 
 1. **Data Import:** The project commences with the importation of the <a href="http://yann.lecun.com/exdb/mnist/">MNIST dataset</a>, which is a widely recognized collection of handwritten digits. This dataset serves as the basis for our letter classification task.
 
