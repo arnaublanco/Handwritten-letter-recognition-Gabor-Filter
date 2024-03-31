@@ -1,0 +1,7 @@
+idx2numpy
+joblib
+scikit-learn
+ipywidgets
+matplotlib
+numpy
+scikit-image

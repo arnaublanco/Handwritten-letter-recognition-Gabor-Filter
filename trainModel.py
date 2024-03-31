@@ -1,3 +1,5 @@
+!pip install -r "requirements.txt"
+
 # Import required libraries
 import numpy as np
 from sklearn import svm
